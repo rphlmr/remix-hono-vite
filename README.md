@@ -6,6 +6,11 @@ It uses [Hono Vite dev server](https://github.com/honojs/vite-plugins/blob/main/
 
 📖 See the [Remix docs](https://remix.run/docs) and the [Remix Vite docs](https://remix.run/docs/en/main/future/vite) for details on supported features.
 
+
+
+https://github.com/rphlmr/remix-hono-vite/assets/20722140/9f368237-ca35-4faf-a14f-58fb4320487b
+
+
 ## Try it
 
 ```shellscript
