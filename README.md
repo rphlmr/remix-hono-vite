@@ -18,7 +18,7 @@ npx create-remix@latest --template rphlmr/remix-hono-vite
 ```
 
 ## How it works
-- On the local dev, you rely [Hono Vite dev server](https://github.com/honojs/vite-plugins/blob/main/packages/dev-server/README.md)
+- On the local dev, you rely on [Hono Vite dev server](https://github.com/honojs/vite-plugins/blob/main/packages/dev-server/README.md)
   - With HTTPS self signed certificate
 - When building, `server/build.ts` bundles `server/index.ts` and `server/middlewares.ts` to `build/server/index.js`
 
