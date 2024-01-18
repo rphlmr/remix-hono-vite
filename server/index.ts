@@ -13,19 +13,19 @@ import { cache } from "server/middlewares";
 
 const mode =
   process.env.NODE_ENV === "test" ? "development" : process.env.NODE_ENV;
+const isProductionMode = mode === "production";
 
-const viteDevServer =
-  mode === "production"
-    ? undefined
-    : await import("vite").then((vite) =>
-        vite.createServer({
-          server: { middlewareMode: true },
-        })
-      );
+async function importDevBuild() {
+  const vite = await import("vite");
+  const viteDevServer = await vite.createServer({
+    server: { middlewareMode: true },
+  });
+  return viteDevServer.ssrLoadModule("virtual:remix/server-build");
+}
 
-const build = (viteDevServer
-  ? () => viteDevServer.ssrLoadModule("virtual:remix/server-build")
-  : await import("../build/server/remix.js")) as unknown as ServerBuild;
+const build = (isProductionMode
+  ? await import("../build/server/remix.js")
+  : await importDevBuild()) as unknown as ServerBuild;
 
 const app = new Hono();
 
@@ -92,29 +92,17 @@ app.use(
     mode,
     getLoadContext() {
       return {
-        appVersion: viteDevServer ? "dev" : build.assets.version,
+        appVersion: isProductionMode ? build.assets.version : "dev",
       } satisfies AppLoadContext;
     },
   })
 );
 
 /**
- * Declare our loaders and actions context type
- */
-declare module "@remix-run/node" {
-  interface AppLoadContext {
-    /**
-     * The app version from the build assets
-     */
-    readonly appVersion: string;
-  }
-}
-
-/**
- * Start the server
+ * Start the production server
  */
 
-if (!viteDevServer) {
+if (isProductionMode) {
   serve(
     {
       ...app,
@@ -127,3 +115,15 @@ if (!viteDevServer) {
 }
 
 export default app;
+
+/**
+ * Declare our loaders and actions context type
+ */
+declare module "@remix-run/node" {
+  interface AppLoadContext {
+    /**
+     * The app version from the build assets
+     */
+    readonly appVersion: string;
+  }
+}
