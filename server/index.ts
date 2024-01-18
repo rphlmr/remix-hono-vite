@@ -1,10 +1,10 @@
 import { serve } from "@hono/node-server";
 import { serveStatic } from "@hono/node-server/serve-static";
 import {
-  AppLoadContext,
-  ServerBuild,
+  type AppLoadContext,
   createCookieSessionStorage,
 } from "@remix-run/node";
+import { type ServerBuild } from "@remix-run/server-runtime";
 import { Hono } from "hono";
 import { logger } from "hono/logger";
 import { remix } from "remix-hono/handler";
