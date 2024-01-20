@@ -22,6 +22,10 @@ export default function Index() {
       <h1 className="text-purple-500 text-3xl font-bold">
         Welcome to Remix Vite !
       </h1>
+      <label>
+        Should persist state accross HMR
+        <input type="text" placeholder="HMR test" />
+      </label>
       <ul>
         <li>
           <a
