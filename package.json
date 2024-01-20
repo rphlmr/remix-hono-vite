@@ -6,7 +6,7 @@
   "scripts": {
     "build": "run-s build:*",
     "build:remix": "remix vite:build",
-    "build:server": "tsx server/build.ts",
+    "build:server": "tsx server/builder.ts",
     "dev": "vite",
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
     "start": "NODE_ENV=production SESSION_SECRET=s3cr3t node ./build/server/index.js",

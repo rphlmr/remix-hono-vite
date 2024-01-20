@@ -19,7 +19,7 @@ export default function Index() {
   const { message, appVersion } = useLoaderData<typeof loader>();
   return (
     <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
-      <h1>Welcome to Remix Vite</h1>
+      <h1>Welcome to Remix Vite !</h1>
       <ul>
         <li>
           <a
