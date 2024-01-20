@@ -20,7 +20,7 @@ export default function Index() {
   return (
     <div>
       <h1 className="text-purple-500 text-3xl font-bold">
-        Welcome to Remix Vite
+        Welcome to Remix Vite !
       </h1>
       <ul>
         <li>

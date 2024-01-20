@@ -11,21 +11,30 @@ import { remix } from "remix-hono/handler";
 import { session } from "remix-hono/session";
 import { cache } from "server/middlewares";
 
-const mode =
-  process.env.NODE_ENV === "test" ? "development" : process.env.NODE_ENV;
-const isProductionMode = mode === "production";
+// This server is only used to load the dev server build
+const viteDevServer =
+  process.env.NODE_ENV === "production"
+    ? undefined
+    : await import("vite").then((vite) =>
+        vite.createServer({
+          server: { middlewareMode: true },
+        })
+      );
 
-async function importDevBuild() {
-  const vite = await import("vite");
-  const viteDevServer = await vite.createServer({
-    server: { middlewareMode: true },
-  });
-  return viteDevServer.ssrLoadModule("virtual:remix/server-build");
+/**
+ * Load the dev server build and force reload it
+ * @returns An up to date server build
+ */
+export async function importDevBuild() {
+  return viteDevServer?.ssrLoadModule(
+    "virtual:remix/server-build" + "?t=" + Date.now()
+  );
 }
 
-const build = (isProductionMode
-  ? await import("../build/server/remix.js")
-  : await importDevBuild()) as unknown as ServerBuild;
+const mode =
+  process.env.NODE_ENV === "test" ? "development" : process.env.NODE_ENV;
+
+const isProductionMode = mode === "production";
 
 const app = new Hono();
 
@@ -86,8 +95,13 @@ app.use(
 /**
  * Add remix middleware to Hono server
  */
-app.use(
-  remix({
+app.use(async (c, next) => {
+  const build = (isProductionMode
+    ? // eslint-disable-next-line import/no-unresolved -- this expected until you build the app
+      await import("../build/server/remix.js")
+    : await importDevBuild()) as unknown as ServerBuild;
+
+  return remix({
     build,
     mode,
     getLoadContext() {
@@ -95,8 +109,8 @@ app.use(
         appVersion: isProductionMode ? build.assets.version : "dev",
       } satisfies AppLoadContext;
     },
-  })
-);
+  })(c, next);
+});
 
 /**
  * Start the production server
