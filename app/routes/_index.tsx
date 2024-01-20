@@ -23,7 +23,7 @@ export default function Index() {
         Welcome to Remix Vite !
       </h1>
       <label>
-        Should persist state accross HMR
+        Should persist state across
         <input type="text" placeholder="HMR test" />
       </label>
       <ul>
