@@ -18,14 +18,21 @@ export function loader({ context }: LoaderFunctionArgs) {
 export default function Index() {
   const { message, appVersion } = useLoaderData<typeof loader>();
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
-      <h1>Welcome to Remix Vite !</h1>
+    <div>
+      <h1 className="text-purple-500 text-3xl font-bold">
+        Welcome to Remix Vite !
+      </h1>
+      <label>
+        Should persist state accross HMR
+        <input type="text" placeholder="HMR test" />
+      </label>
       <ul>
         <li>
           <a
             target="_blank"
             href="https://remix.run/tutorials/blog"
             rel="noreferrer"
+            className="text-blue-500"
           >
             15m Quickstart Blog Tutorial
           </a>
