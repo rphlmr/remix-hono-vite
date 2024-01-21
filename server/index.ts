@@ -10,26 +10,7 @@ import { logger } from "hono/logger";
 import { remix } from "remix-hono/handler";
 import { session } from "remix-hono/session";
 import { cache } from "server/middlewares";
-
-// This server is only used to load the dev server build
-const viteDevServer =
-  process.env.NODE_ENV === "production"
-    ? undefined
-    : await import("vite").then((vite) =>
-        vite.createServer({
-          server: { middlewareMode: true },
-        })
-      );
-
-/**
- * Load the dev server build and force reload it
- * @returns An up to date server build
- */
-export async function importDevBuild() {
-  return viteDevServer?.ssrLoadModule(
-    "virtual:remix/server-build" + "?t=" + Date.now()
-  );
-}
+import { importDevBuild } from "./dev/server.js";
 
 const mode =
   process.env.NODE_ENV === "test" ? "development" : process.env.NODE_ENV;
