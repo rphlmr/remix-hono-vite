@@ -1,3 +1,7 @@
+# This project has been moved to [remix-galaxy](https://github.com/rphlmr/remix-galaxy/tree/main/playgrounds/remix-hono-vite)
+
+
+
 # Welcome to Remix + Vite + Hono!
 
 This is a demo of [remix-hono](https://github.com/sergiodxa/remix-hono) with Vite. 
