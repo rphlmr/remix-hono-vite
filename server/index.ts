@@ -42,6 +42,7 @@ app.use("*", logger());
  * Add session middleware (https://github.com/sergiodxa/remix-hono?tab=readme-ov-file#session-management)
  */
 app.use(
+  // @ts-expect-error - FIXME: require next remix-hono version
   session({
     autoCommit: true,
     createSessionStorage() {
@@ -90,6 +91,7 @@ app.use(async (c, next) => {
         appVersion: isProductionMode ? build.assets.version : "dev",
       } satisfies AppLoadContext;
     },
+    // @ts-expect-error - FIXME: require next remix-hono version
   })(c, next);
 });
 
