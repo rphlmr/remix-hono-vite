@@ -12,7 +12,6 @@ import {
   json,
   useActionData,
   useLoaderData,
-  useMatches,
 } from "@remix-run/react";
 import { Suspense } from "react";
 
@@ -55,8 +54,6 @@ export default function Index() {
   const loaderData = useLoaderData<typeof loader>();
   const actionData = useActionData<typeof action>();
 
-  const matches = useMatches();
-  console.log(matches);
   return (
     <main className="flex flex-col items-center gap-4 py-4">
       <h1 className="text-purple-500 text-3xl font-bold">
