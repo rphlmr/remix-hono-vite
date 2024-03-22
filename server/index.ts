@@ -3,8 +3,8 @@ import { serveStatic } from "@hono/node-server/serve-static";
 import {
   type AppLoadContext,
   createCookieSessionStorage,
+  type ServerBuild,
 } from "@remix-run/node";
-import { type ServerBuild } from "@remix-run/server-runtime";
 import { Hono } from "hono";
 import { logger } from "hono/logger";
 import { remix } from "remix-hono/handler";
@@ -42,7 +42,6 @@ app.use("*", logger());
  * Add session middleware (https://github.com/sergiodxa/remix-hono?tab=readme-ov-file#session-management)
  */
 app.use(
-  // @ts-expect-error - FIXME: require next remix-hono version
   session({
     autoCommit: true,
     createSessionStorage() {
@@ -93,7 +92,6 @@ app.use(async (c, next) => {
         appVersion: isProductionMode ? build.assets.version : "dev",
       } satisfies AppLoadContext;
     },
-    // @ts-expect-error - FIXME: require next remix-hono version
   })(c, next);
 });
 
