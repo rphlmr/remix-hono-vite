@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "remix vite:build",
-    "dev": "vite --host --force",
+    "dev": "vite --host",
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
     "start": "NODE_ENV=production SESSION_SECRET=s3cr3t node ./build/server/index.js",
     "start:docker": "run-s docker:*",
