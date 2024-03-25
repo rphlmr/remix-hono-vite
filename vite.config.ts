@@ -24,6 +24,13 @@ export default defineConfig({
   optimizeDeps: {
     include: ["./app/routes/**/*"],
   },
+  // Hello 👋 Prisma users, uncomment that. Thanks @AlemTuzlak
+  // resolve: {
+  //   alias: {
+  //     ".prisma/client/index-browser":
+  //       "./node_modules/.prisma/client/index-browser.js",
+  //   },
+  // },
   plugins: [
     devServer({
       injectClientScript: false,
