@@ -1,7 +1,7 @@
 import { vitePlugin as remix } from "@remix-run/dev";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
-import devServer, { defaultOptions } from "@hono/vite-dev-server";
+import devServer from "@hono/vite-dev-server";
 import esbuild from "esbuild";
 
 export default defineConfig({
@@ -35,7 +35,7 @@ export default defineConfig({
     devServer({
       injectClientScript: false,
       entry: "server/index.ts", // The file path of your server.
-      exclude: [/^\/(app)\/.+/, ...defaultOptions.exclude],
+      exclude: [/^\/(app)\/.+/, /^\/@.+$/, /^\/node_modules\/.*/],
     }),
     tsconfigPaths(),
     remix({
