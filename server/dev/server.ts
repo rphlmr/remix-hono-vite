@@ -10,8 +10,8 @@ const viteDevServer =
       );
 
 /**
- * Load the dev server build and force reload it
- * @returns An up to date server build
+ * Load the dev server build
+ * @returns The server build
  */
 export async function importDevBuild() {
   return viteDevServer?.ssrLoadModule("virtual:remix/server-build");
