@@ -10,7 +10,7 @@ import { logger } from "hono/logger";
 import { remix } from "remix-hono/handler";
 import { session } from "remix-hono/session";
 import { cache } from "server/middlewares";
-import { importDevBuild } from "./dev/server.js";
+import { importDevBuild } from "./dev/server";
 
 const mode =
   process.env.NODE_ENV === "test" ? "development" : process.env.NODE_ENV;
