@@ -5,8 +5,10 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-// https://remix.run/docs/en/main/future/vite#fix-up-css-imports
-import "~/tailwind.css";
+import { LinksFunction } from "@remix-run/node";
+import styles from "~/tailwind.css?url";
+
+export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
 
 export default function App() {
   return (
